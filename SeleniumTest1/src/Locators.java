@@ -43,6 +43,6 @@ public class Locators {
     driver.findElement(By.cssSelector(".reset-pwd-btn")).click();
     System.out.println(driver.findElement(By.cssSelector("form p")).getText());
 
-    
+
   }
 }
