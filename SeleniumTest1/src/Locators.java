@@ -15,15 +15,16 @@ public class Locators {
 
   /**
    * @param args
+   * @throws InterruptedException
    */
-  public static void main(String[] args) {
+  public static void main(String[] args) throws InterruptedException {
     System.setProperty(
       "webdriver.chrome.driver",
       "/Users/pavelphilipchik/Study/chromedriver_mac_arm64/chromedriver"
     );
     WebDriver driver = new ChromeDriver();
 
-    driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3);
+    driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
 
     driver.get("https://rahulshettyacademy.com/locatorspractice/");
     driver.findElement(By.id("inputUsername")).sendKeys("Pavel Philipchik");
@@ -43,7 +44,18 @@ public class Locators {
       .sendKeys("767674854");
     driver.findElement(By.cssSelector(".reset-pwd-btn")).click();
     System.out.println(driver.findElement(By.cssSelector("form p")).getText());
-
-
+    driver
+      .findElement(
+        By.xpath("//div[@class='forgot-pwd-btn-conainer']/button[1]")
+      )
+      .click();
+    Thread.sleep(2000);
+    driver.findElement(By.cssSelector("#inputUsername")).sendKeys("Pavel");
+    driver
+      .findElement(By.cssSelector("input[type*='pass']"))
+      .sendKeys("rahulshettyacademy"); //CssSelector with regex *= means ANY MATCH, ^= means in the beginning, $= means in the end
+    driver.findElement(By.id("chkboxOne")).click();
+    driver.findElement(By.xpath("//input[@value='agreeTerms']")).click();
+    driver.findElement(By.xpath("//button[contains(@class,'submit')]")).click(); //xPath regular expression
   }
 }
