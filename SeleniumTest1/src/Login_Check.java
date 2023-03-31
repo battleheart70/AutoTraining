@@ -6,8 +6,6 @@ import org.testng.Assert;
 
 public class Login_Check {
 
-  private String[] split;
-
   /**
    * @param args
    * @throws InterruptedException
@@ -42,32 +40,32 @@ public class Login_Check {
     driver
       .findElement(By.xpath("//button[contains(text(),'Log Out')]"))
       .click();
-      Thread.sleep(2000);
-      driver.quit();
+    Thread.sleep(2000);
+    driver.quit();
   }
 
-/**
- * @param driver
- * @return 
- * @throws InterruptedException
- */
-public static String getPassword(WebDriver driver) throws InterruptedException {
-  driver.get("https://rahulshettyacademy.com/locatorspractice/");
-  driver.findElement(By.linkText("Forgot your password?")).click();
-  Thread.sleep(2000);
-  driver.findElement(By.cssSelector(".reset-pwd-btn")).click();
-  String passwordText = (driver.findElement(By.cssSelector("form p")).getText());
-  //Please use temporary password 'rahulshettyacademy' to Login.
-  String[] passwordArray = passwordText.split("'");
-  //after split
-  //1st string  - "Please use temporary password " [0] index
-  //2nd string - rahulshettyacademy' to Login. [1] index
-  String password = passwordArray[1].split("'")[0];
-  //after split
-  //1st string  -  rahulshettyacademy [0] index
-  //2nd string - to Login. [1] index
-  return password;
-}
-
-
+  /**
+   * @param driver
+   * @return
+   * @throws InterruptedException
+   */
+  public static String getPassword(WebDriver driver)
+    throws InterruptedException {
+    driver.get("https://rahulshettyacademy.com/locatorspractice/");
+    driver.findElement(By.linkText("Forgot your password?")).click();
+    Thread.sleep(2000);
+    driver.findElement(By.cssSelector(".reset-pwd-btn")).click();
+    String passwordText =
+      (driver.findElement(By.cssSelector("form p")).getText());
+    //Please use temporary password 'rahulshettyacademy' to Login.
+    String[] passwordArray = passwordText.split("'");
+    //after split
+    //1st string  - "Please use temporary password " [0] index
+    //2nd string - rahulshettyacademy' to Login. [1] index
+    String password = passwordArray[1].split("'")[0];
+    //after split
+    //1st string  -  rahulshettyacademy [0] index
+    //2nd string - to Login. [1] index
+    return password;
+  }
 }
