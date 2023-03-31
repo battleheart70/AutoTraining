@@ -31,6 +31,7 @@ public class Locators {
     driver.findElement(By.className("signInBtn")).click();
     System.out.println(driver.findElement(By.cssSelector("p.error")).getText());
     driver.findElement(By.linkText("Forgot your password?")).click();
+    Thread.sleep(2000);
     driver
       .findElement(By.xpath("//input[@placeholder='Name']"))
       .sendKeys("MyName");
