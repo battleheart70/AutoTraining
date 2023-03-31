@@ -6,6 +6,8 @@ import org.testng.Assert;
 
 public class Login_Check {
 
+  private String[] split;
+
   /**
    * @param args
    * @throws InterruptedException
@@ -21,10 +23,10 @@ public class Login_Check {
     WebDriver driver = new ChromeDriver();
 
     driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
-
+    String password = getPassword(driver);
     driver.get("https://rahulshettyacademy.com/locatorspractice/");
     driver.findElement(By.id("inputUsername")).sendKeys(name);
-    driver.findElement(By.name("inputPassword")).sendKeys("rahulshettyacademy");
+    driver.findElement(By.name("inputPassword")).sendKeys(password);
     driver.findElement(By.className("signInBtn")).click();
     Thread.sleep(2000);
     System.out.println(driver.findElement(By.tagName("p")).getText());
@@ -43,4 +45,29 @@ public class Login_Check {
       Thread.sleep(2000);
       driver.quit();
   }
+
+/**
+ * @param driver
+ * @return 
+ * @throws InterruptedException
+ */
+public static String getPassword(WebDriver driver) throws InterruptedException {
+  driver.get("https://rahulshettyacademy.com/locatorspractice/");
+  driver.findElement(By.linkText("Forgot your password?")).click();
+  Thread.sleep(2000);
+  driver.findElement(By.cssSelector(".reset-pwd-btn")).click();
+  String passwordText = (driver.findElement(By.cssSelector("form p")).getText());
+  //Please use temporary password 'rahulshettyacademy' to Login.
+  String[] passwordArray = passwordText.split("'");
+  //after split
+  //1st string  - "Please use temporary password " [0] index
+  //2nd string - rahulshettyacademy' to Login. [1] index
+  String password = passwordArray[1].split("'")[0];
+  //after split
+  //1st string  -  rahulshettyacademy [0] index
+  //2nd string - to Login. [1] index
+  return password;
+}
+
+
 }
